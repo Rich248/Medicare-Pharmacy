@@ -871,7 +871,8 @@ h1 em, .teal { color: var(--teal); font-style: normal; }
   .footer-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
-  .cart-chip { display: none; }
+  .cart-chip { padding: 6px; gap: 6px; }
+  .cart-chip > span:not(.cart-count) { display: none; }
   .login-btn { margin-left: auto; }
   h1 { font-size: 38px; }
   .actions, .promo-shell, .chat-shell, .footer-bottom { flex-direction: column; align-items: stretch; }
