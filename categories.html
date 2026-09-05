@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse medicines by category at MediCare Pharmacy Ghana. Filter by medicines, vitamins, personal care, healthcare, and baby care products.">
+  <title>Categories - MediCare Pharmacy</title>
+    <link rel="stylesheet" href="styles.css">
+  <style>
+    .category-card small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .category-info-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .info-card {
+      background: var(--ice);
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+    .info-card h2 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--navy);
+    }
+    .info-card p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .benefit-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .benefit-list li {
+      padding: 8px 0;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .info-card .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      text-decoration: none;
+    }
+    .categories-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .category-group {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .category-group:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px;
+      background: var(--ice);
+      border-bottom: 1px solid var(--line);
+    }
+    .category-header h3 {
+      flex: 1;
+      font-size: 18px;
+      color: var(--navy);
+      margin: 0;
+    }
+    .product-count {
+      font-size: 13px;
+      color: var(--teal);
+      font-weight: 600;
+      background: var(--mint);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .subcategory-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      padding: 1px;
+    }
+    .subcategory-item {
+      display: block;
+      padding: 14px 16px;
+      background: white;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .subcategory-item:hover {
+      background: var(--ice);
+      color: var(--teal);
+    }
+    @media (max-width: 768px) {
+      .categories-container {
+        grid-template-columns: 1fr;
+      }
+      .subcategory-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="index.html" aria-label="MediCare Pharmacy home"><img src="images/logo.jpg" alt="MediCare Pharmacy Logo" class="brand-logo"><span><span class="brand-name">Medi<span>Care</span></span><small>PHARMACY</small></span></a>
+      <nav class="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="medicines.html">Medicines</a><a href="categories.html" class="active">Categories</a><a href="about.html">About Us</a><a href="#contact">Contact</a></nav>
+      <label class="search-box" aria-label="Search medicines"><span aria-hidden="true"><svg class="icon-search" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input id="searchInput" type="search" placeholder="Search medicines, vitamins..."></label>
+      <button class="cart-chip" type="button" data-cart aria-label="Open cart"><svg class="icon-cart" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cart-count" data-cart-count hidden>0</span><span>Cart <small data-cart-total>GH₵ 0.00</small></span></button>
+      <div id="userAuthSection">
+        <a class="signup-btn" href="login.html">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <div class="container">
+        <h1>Browse by Category</h1>
+        <p>Find medical equipment, child care items, prescription and OTC drugs quickly.</p>
+      </div>
+    </section>
+
+    <section class="section section-white" id="categories">
+      <div class="container">
+        <div class="categories-container">
+          <!-- Prescription Medicines -->
+          <div class="category-group">
+            <div class="category-header">
+              <span class="icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49 0 2.883.41 4 1.12V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"></path>
+                  <line x1="12" y1="12" x2="12" y2="17"></line>
+                  <line x1="12" y1="17" x2="9" y2="14"></line>
+                  <line x1="12" y1="17" x2="15" y2="14"></line>
+                </svg>
+              </span>
+              <h3>Prescription Medicines</h3>
+              <span class="product-count">450+ Products</span>
+            </div>
+            <div class="subcategory-list">
+              <a href="medicines.html" class="subcategory-item">Antibiotics</a>
+              <a href="medicines.html" class="subcategory-item">Pain Relief</a>
+              <a href="medicines.html" class="subcategory-item">Cardiovascular</a>
+              <a href="medicines.html" class="subcategory-item">Diabetes Care</a>
+              <a href="medicines.html" class="subcategory-item">Respiratory</a>
+              <a href="medicines.html" class="subcategory-item">Gastrointestinal</a>
+            </div>
+          </div>
+
+          <!-- Over-the-Counter Drugs -->
+          <div class="category-group">
+            <div class="category-header">
+              <span class="icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.74 5.88-5.74 5.88-5.74-5.88z"></path>
+                  <path d="M12 21.31l5.74-5.88-5.74-5.88-5.74 5.88z"></path>
+                </svg>
+              </span>
+              <h3>Over-the-Counter Drugs</h3>
+              <span class="product-count">380+ Products</span>
+            </div>
+            <div class="subcategory-list">
+              <a href="medicines.html" class="subcategory-item">Cold & Flu</a>
+              <a href="medicines.html" class="subcategory-item">Allergy Relief</a>
+              <a href="medicines.html" class="subcategory-item">Digestive Health</a>
+              <a href="medicines.html" class="subcategory-item">Pain Management</a>
+              <a href="medicines.html" class="subcategory-item">First Aid</a>
+              <a href="medicines.html" class="subcategory-item">Sleep Aids</a>
+            </div>
+          </div>
+
+          <!-- Health Supplements -->
+          <div class="category-group">
+            <div class="category-header">
+              <span class="icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2v4"></path>
+                  <path d="M12 18v4"></path>
+                  <path d="M4.93 4.93l2.83 2.83"></path>
+                  <path d="M16.24 16.24l2.83 2.83"></path>
+                  <path d="M2 12h4"></path>
+                  <path d="M18 12h4"></path>
+                  <path d="M4.93 19.07l2.83-2.83"></path>
+                  <path d="M16.24 7.76l2.83-2.83"></path>
+                </svg>
+              </span>
+              <h3>Health Supplements</h3>
+              <span class="product-count">320+ Products</span>
+            </div>
+            <div class="subcategory-list">
+              <a href="medicines.html" class="subcategory-item">Multivitamins</a>
+              <a href="medicines.html" class="subcategory-item">Omega-3 Fish Oil</a>
+              <a href="medicines.html" class="subcategory-item">Calcium & Bone Health</a>
+              <a href="medicines.html" class="subcategory-item">Iron Supplements</a>
+              <a href="medicines.html" class="subcategory-item">Probiotics</a>
+              <a href="medicines.html" class="subcategory-item">Protein Supplements</a>
+            </div>
+          </div>
+
+          <!-- Personal Care -->
+          <div class="category-group">
+            <div class="category-header">
+              <span class="icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"></path>
+                </svg>
+              </span>
+              <h3>Personal Care</h3>
+              <span class="product-count">280+ Products</span>
+            </div>
+            <div class="subcategory-list">
+              <a href="medicines.html" class="subcategory-item">Skin Care</a>
+              <a href="medicines.html" class="subcategory-item">Hair Care</a>
+              <a href="medicines.html" class="subcategory-item">Oral Care</a>
+              <a href="medicines.html" class="subcategory-item">Hand Sanitizers</a>
+              <a href="medicines.html" class="subcategory-item">Body Care</a>
+              <a href="medicines.html" class="subcategory-item">Feminine Care</a>
+            </div>
+          </div>
+
+          <!-- Medical Equipment -->
+          <div class="category-group">
+            <div class="category-header">
+              <span class="icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </span>
+              <h3>Medical Equipment</h3>
+              <span class="product-count">190+ Products</span>
+            </div>
+            <div class="subcategory-list">
+              <a href="medicines.html" class="subcategory-item">Blood Pressure Monitors</a>
+              <a href="medicines.html" class="subcategory-item">Glucose Meters</a>
+              <a href="medicines.html" class="subcategory-item">Thermometers</a>
+              <a href="medicines.html" class="subcategory-item">First Aid Kits</a>
+              <a href="medicines.html" class="subcategory-item">Mobility Aids</a>
+              <a href="medicines.html" class="subcategory-item">Diagnostic Tools</a>
+            </div>
+          </div>
+
+          <!-- Baby Care -->
+          <div class="category-group">
+            <div class="category-header">
+              <span class="icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 8v4"></path>
+                  <path d="M12 16h.01"></path>
+                </svg>
+              </span>
+              <h3>Baby Care</h3>
+              <span class="product-count">150+ Products</span>
+            </div>
+            <div class="subcategory-list">
+              <a href="medicines.html" class="subcategory-item">Baby Vitamins</a>
+              <a href="medicines.html" class="subcategory-item">Baby Drops</a>
+              <a href="medicines.html" class="subcategory-item">Diaper Care</a>
+              <a href="medicines.html" class="subcategory-item">Baby Skin Care</a>
+              <a href="medicines.html" class="subcategory-item">Feeding Accessories</a>
+              <a href="medicines.html" class="subcategory-item">Baby Health</a>
+            </div>
+          </div>
+
+          <!-- Wellness Products -->
+          <div class="category-group">
+            <div class="category-header">
+              <span class="icon-circle">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                </svg>
+              </span>
+              <h3>Wellness Products</h3>
+              <span class="product-count">120+ Products</span>
+            </div>
+            <div class="subcategory-list">
+              <a href="medicines.html" class="subcategory-item">Stress Relief</a>
+              <a href="medicines.html" class="subcategory-item">Immune Support</a>
+              <a href="medicines.html" class="subcategory-item">Energy Boosters</a>
+              <a href="medicines.html" class="subcategory-item">Sleep Wellness</a>
+              <a href="medicines.html" class="subcategory-item">Mental Health</a>
+              <a href="medicines.html" class="subcategory-item">Fitness Supplements</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-info-section">
+          <div class="info-card">
+            <h2>Shop by Category</h2>
+            <p>Browse our organized categories to quickly find what you need. Each category is curated with FDA-approved products from trusted manufacturers.</p>
+            <ul class="benefit-list">
+              <li>✓ Certified medications and healthcare products</li>
+              <li>✓ Fast delivery across Ghana</li>
+              <li>✓ Expert pharmacist support</li>
+              <li>✓ Secure payment options</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h2>Need Help Finding Products?</h2>
+            <p>Our team of certified pharmacists is available to help you find the right products for your health needs.</p>
+            <a href="#contact" class="btn btn-primary">Contact Support</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img src="images/logo.jpg" alt="MediCare Pharmacy Logo" class="brand-logo"><span><span class="brand-name">Medi<span>Care</span></span><small>PHARMACY</small></span></a>
+        <p>Your most trusted online digital pharmacy in Ghana. We offer high quality certified medicine, healthcare products, and live doctor consultation.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook" data-social="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" aria-label="Twitter" data-social="Twitter"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="LinkedIn" data-social="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Instagram" data-social="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3>Useful Links</h3>
+        <a href="index.html">Home</a>
+        <a href="categories.html">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="#contact">Contact Clinic</a>
+        <a href="careers.html">Careers</a>
+      </div>
+      <div>
+        <h3>Categories</h3>
+        <a href="categories.html" data-category="medicines">Prescriptions</a>
+        <a href="categories.html" data-category="personal-care">Personal Hygiene</a>
+        <a href="categories.html" data-category="vitamins">Vitamins &amp; Supplements</a>
+        <a href="categories.html" data-category="baby-care">Baby &amp; Child Health</a>
+        <a href="categories.html" data-category="healthcare">Medical Devices</a>
+      </div>
+      <div>
+        <h3>Contact Head Office</h3>
+        <p>⌖ 123 Healthcare Boulevard, Airport Residential, Accra, Ghana</p>
+        <p>♙ +233 (0) 555 123 456</p>
+        <p>✉ support@medicare.com.gh</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 MediCare Pharmacy Ghana Ltd. All rights reserved.</span>
+      <span><a href="terms.html">Terms of Service</a> &nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp; <a href="about.html#fda">FDA Ghana Certified</a></span>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="authModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">&#10005;</button>
+      <h2 id="authModalTitle" class="sr-only">Account access</h2>
+
+      <div id="authTabs" class="modal-tabs">
+        <button type="button" class="modal-tab active" data-auth-tab="login">Log In</button>
+        <button type="button" class="modal-tab" data-auth-tab="signup">Sign Up</button>
+      </div>
+
+      <form id="loginForm" class="auth-form" data-auth-form="login" novalidate>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" placeholder="••••••••" required>
+        </label>
+        <button type="submit" class="btn btn-primary auth-submit">Log In</button>
+        <p class="form-note">Don't have an account? <a href="#" data-auth-switch="signup">Sign up</a></p>
+        <div class="form-error" data-form-error hidden></div>
+      </form>
+
+      <form id="signupForm" class="auth-form" data-auth-form="signup" novalidate hidden>
+        <label>
+          Full Name
+          <input type="text" name="name" placeholder="Your full name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          Password
+          <input type="password" name="password" placeholder="••••••••" required>
+        </label>
+        <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+        <p class="form-note">Already have an account? <a href="#" data-auth-switch="login">Log in</a></p>
+        <div class="form-error" data-form-error hidden></div>
+      </form>
+
+      <div id="accountView" class="account-view" hidden>
+        <p class="account-greeting">Welcome back, <strong id="accountName"></strong>!</p>
+        <p id="accountEmail" class="form-note"></p>
+        <button type="button" id="logoutBtn" class="btn btn-secondary">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay cart-modal" id="cartModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">&#10005;</button>
+      <h2 id="cartModalTitle" class="sr-only">Shopping Cart</h2>
+      <h2>Your Cart</h2>
+      <div id="cartItemsList" class="cart-items"></div>
+      <div class="cart-summary">
+        <span>Total</span>
+        <span id="cartModalTotal">GH₵ 0.00</span>
+      </div>
+      <button type="button" id="checkoutBtn" class="btn btn-primary cart-checkout">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>

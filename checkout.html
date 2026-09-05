@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Checkout for MediCare Pharmacy Ghana">
+  <title>Checkout — MediCare Pharmacy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="index.html" aria-label="MediCare Pharmacy home">
+        <img src="images/logo.jpg" alt="MediCare Pharmacy Logo" class="brand-logo">
+        <span>
+          <span class="brand-name">Medi<span>Care</span></span>
+          <small>PHARMACY</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Medicines</a>
+        <a href="index.html#categories">Categories</a>
+        <a href="about.html">About Us</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <label class="search-box" aria-label="Search medicines">
+        <span aria-hidden="true">
+          <svg class="icon-search" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <input id="searchInput" type="search" placeholder="Search medicines, vitamins...">
+      </label>
+      <button class="cart-chip" type="button" data-cart aria-label="Open cart">
+        <svg class="icon-cart" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 8h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 8Z"/>
+          <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+        </svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+        <span>Cart <small data-cart-total>GH₵ 0.00</small></span>
+      </button>
+      <div id="userAuthSection">
+        <a class="signup-btn" href="login.html">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-intro">
+    <div class="container">Home &nbsp; › &nbsp; <strong>Checkout</strong></div>
+  </div>
+
+  <main>
+    <section class="checkout">
+      <div class="container">
+        <div class="checkout-progress">
+          <div class="progress-step completed">
+            <span class="step-number">1</span>
+            <span class="step-label">Cart</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step completed">
+            <span class="step-number">2</span>
+            <span class="step-label">Delivery</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step active">
+            <span class="step-number">3</span>
+            <span class="step-label">Payment</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <span class="step-number">4</span>
+            <span class="step-label">Confirmation</span>
+          </div>
+        </div>
+
+        <div class="checkout-grid">
+          <div class="checkout-main">
+            <div class="checkout-section">
+              <h2>Delivery Address</h2>
+              <button class="change-link hidden" id="changeAddressBtn">Change</button>
+              <div class="address-display hidden" id="addressDisplay">
+                <div class="address-name" id="displayRecipientName"></div>
+                <div class="address-text" id="displayAddress"></div>
+                <div class="address-phone" id="displayPhone"></div>
+              </div>
+              
+              <form id="addressForm" class="address-form">
+                <label>Full Name<input type="text" id="recipientName" required placeholder="Sarah Smith"></label>
+                <label>Delivery Address<input type="text" id="deliveryAddress" required placeholder="House No 12, Airport West Lane, Accra"></label>
+                <label>Phone Number<input type="tel" id="phoneNumber" required placeholder="+233 (0) 555 123 456"></label>
+              </form>
+            </div>
+
+            <div class="checkout-section">
+              <h2>Select Payment Method</h2>
+              <div class="payment-methods">
+                <label class="payment-option recommended">
+                  <input type="radio" name="paymentMethod" value="momo" checked>
+                  <div class="payment-card">
+                    <div class="payment-header">
+                      <strong>Mobile Money (MTN, Telecel, AT)</strong>
+                      <span class="recommended-badge">RECOMMENDED</span>
+                    </div>
+                    <p class="payment-desc">Enter your Mobile Money phone number to receive payment prompt automatically.</p>
+                    <div class="payment-details">
+                      <label>Provider
+                        <select id="momoProvider">
+                          <option value="mtn">MTN MoMo</option>
+                          <option value="telecel">Telecel Cash</option>
+                          <option value="at">AT Money</option>
+                        </select>
+                      </label>
+                      <label for="momoNumber">MoMo Number<input type="tel" id="momoNumber" name="momoNumber" inputmode="numeric" autocomplete="tel" placeholder="XXX XXX XXXX" maxlength="15" required><small class="field-help">Enter the number that should receive the payment prompt.</small></label>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="payment-option">
+                  <input type="radio" name="paymentMethod" value="card">
+                  <div class="payment-card">
+                    <div class="payment-header">
+                      <strong>Credit / Debit Card</strong>
+                      <div class="card-logos">
+                        <span class="card-logo visa">VISA</span>
+                        <span class="card-logo mastercard">Mastercard</span>
+                      </div>
+                    </div>
+                    <p class="payment-desc">Pay securely with your credit or debit card.</p>
+                    <div class="payment-details hidden" id="cardPaymentDetails">
+<label for="cardNumber">Card Number<input type="text" id="cardNumber" name="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="XXX XXXX XXXX XXXX XXXX" maxlength="19" required></label>
+                      <div class="card-row">
+                        <label for="expiryDate">Expiry Date<input type="text" id="expiryDate" name="expiryDate" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required></label>
+                        <label for="cvv">CVV<input type="password" id="cvv" name="cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="XXX" maxlength="3" minlength="3" required></label>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+
+                <script>
+                  (function () {
+                    function setPaymentFields(method) {
+                      document.querySelectorAll('.payment-details').forEach(function (panel) {
+                        panel.classList.toggle('hidden', !panel.closest('.payment-option').querySelector('input[name="paymentMethod"]').checked);
+                      });
+                      var momoPanel = document.querySelector('#momoNumber')?.closest('.payment-details');
+                      var cardPanel = document.getElementById('cardPaymentDetails');
+                      if (momoPanel) momoPanel.classList.toggle('hidden', method !== 'momo');
+                      if (cardPanel) cardPanel.classList.toggle('hidden', method !== 'card');
+                    }
+                    document.querySelectorAll('input[name="paymentMethod"]').forEach(function (radio) {
+                      radio.addEventListener('change', function () { setPaymentFields(this.value); });
+                    });
+                    setPaymentFields(document.querySelector('input[name="paymentMethod"]:checked')?.value || 'momo');
+                  }());
+                </script>
+              </div>
+            </div>
+          </div>
+
+          <div class="checkout-sidebar">
+            <div class="order-summary-card">
+              <h2>Order Summary</h2>
+              <div id="checkoutItemsList" class="checkout-items"></div>
+              <div class="summary-breakdown">
+                <div class="summary-row">
+                  <span>Subtotal</span>
+                  <span id="checkoutSubtotal">GH₵ 0.00</span>
+                </div>
+                <div class="summary-row">
+                  <span>Delivery Fee</span>
+                  <span id="checkoutDeliveryFee">GH₵ 15.00</span>
+                </div>
+                <div class="summary-row">
+                  <span>Discount (0%)</span>
+                  <span id="checkoutDiscount">- GH₵ 0.00</span>
+                </div>
+                <div class="summary-row total-row">
+                  <span>Total</span>
+                  <strong id="checkoutTotal">GH₵ 0.00</strong>
+                </div>
+              </div>
+              <p class="payment-note">Orders will require MoMo/M-Money confirmation or Prescription uploads for controlled items.</p>
+              <button type="button" class="btn btn-primary checkout-btn" id="placeOrderBtn">Continue Checkout &amp; Pay</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img src="images/logo.jpg" alt="MediCare Pharmacy Logo" class="brand-logo">
+          <span>
+            <span class="brand-name">Medi<span>Care</span></span>
+            <small>PHARMACY</small>
+          </span>
+        </a>
+        <p>Your most trusted online digital pharmacy in Ghana. We offer high quality certified medicine, healthcare products, and live doctor consultation.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook" data-social="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" aria-label="Twitter" data-social="Twitter"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="LinkedIn" data-social="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Instagram" data-social="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3>Useful Links</h3>
+        <a href="index.html">Home</a>
+        <a href="index.html#products">All Medicines</a>
+        <a href="about.html">About Us</a>
+        <a href="#contact">Contact Clinic</a>
+        <a href="#" data-careers>Careers</a>
+      </div>
+      <div>
+        <h3>Categories</h3>
+        <a href="index.html#categories">Prescriptions</a>
+        <a href="index.html#categories">Personal Hygiene</a>
+        <a href="index.html#categories">Vitamins &amp; Supplements</a>
+        <a href="index.html#categories">Baby &amp; Child Health</a>
+        <a href="index.html#categories">Medical Devices</a>
+      </div>
+      <div>
+        <h3>Contact Head Office</h3>
+        <p>⌖ 123 Healthcare Boulevard, Airport Residential, Accra, Ghana</p>
+        <p>♙ +233 (0) 555 123 456</p>
+        <p>✉ support@medicare.com.gh</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 MediCare Pharmacy Ghana Ltd. All rights reserved.</span>
+      <span>
+        <a href="#" data-legal="Terms of Service">Terms of Service</a> &nbsp; 
+        <a href="#" data-legal="Privacy Policy">Privacy Policy</a> &nbsp; 
+        <a href="about.html#fda">FDA Ghana Certified</a>
+      </span>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="authModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">&#10005;</button>
+      <h2 id="authModalTitle" class="sr-only">Account access</h2>
+
+      <div id="authTabs" class="modal-tabs">
+        <button type="button" class="modal-tab active" data-auth-tab="login">Log In</button>
+        <button type="button" class="modal-tab" data-auth-tab="signup">Sign Up</button>
+      </div>
+
+      <form id="loginForm" class="auth-form" data-auth-form="login" novalidate>
+        <label>Email<input type="email" name="email" required placeholder="you@example.com"></label>
+        <label>Password<input type="password" name="password" required minlength="6" placeholder="********"></label>
+        <p class="form-error" data-form-error hidden></p>
+        <button type="submit" class="btn btn-primary auth-submit">Log In</button>
+        <p class="form-note">New to MediCare? <a href="login.html">Create an account</a></p>
+      </form>
+
+      <form id="signupForm" class="auth-form" data-auth-form="signup" hidden novalidate>
+        <label>Full Name<input type="text" name="name" required placeholder="Ama Mensah"></label>
+        <label>Email<input type="email" name="email" required placeholder="you@example.com"></label>
+        <label>Password<input type="password" name="password" required minlength="6" placeholder="Create a password"></label>
+        <p class="form-error" data-form-error hidden></p>
+        <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+        <p class="form-note">Already have an account? <a href="login.html">Log in</a></p>
+      </form>
+
+      <div class="account-view" id="accountView" hidden>
+        <p class="account-greeting">Logged in as <strong id="accountName"></strong></p>
+        <p class="form-note" id="accountEmail"></p>
+        <button type="button" class="btn btn-secondary" id="logoutBtn">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="cartModal" hidden>
+    <div class="modal cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">&#10005;</button>
+      <h2 id="cartModalTitle">Your Cart</h2>
+      <div class="cart-items" id="cartItemsList"></div>
+      <div class="cart-summary"><span>Total</span><strong id="cartModalTotal">GH&#8373; 0.00</strong></div>
+      <button type="button" class="btn btn-primary cart-checkout" id="checkoutBtn">Checkout</button>
+    </div>
+  </div>
+  <style>
+    .field-help { display: block; margin-top: .35rem; color: #6b7280; font-size: .78rem; font-weight: 400; }
+    .payment-details input { transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease; }
+    .payment-details input:focus { border-color: #0f9f87; box-shadow: 0 0 0 3px rgba(15,159,135,.15); outline: none; }
+    .payment-details { display: block !important; padding-top: .75rem; }
+    .payment-details.hidden { display: none !important; }
+    .payment-details input, .payment-details select { display: block !important; visibility: visible !important; width: 100%; box-sizing: border-box; }
+    #cardPaymentDetails { display: none !important; }
+    #cardPaymentDetails:not(.hidden) { display: block !important; }
+    .payment-details input:invalid:not(:placeholder-shown) { border-color: #d9534f; }
+  </style>
+  <script src="script.js" defer></script>
+</body>
+</html>
