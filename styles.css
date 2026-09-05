@@ -2419,3 +2419,10 @@ h1, h2, h3, h4, p, a, li, small, strong, span {
   outline: 3px solid rgba(15, 159, 135, .35);
   outline-offset: 3px;
 }
+
+/* Ghana cedi mark for the Secure Payments trust item */
+.currency-icon {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
